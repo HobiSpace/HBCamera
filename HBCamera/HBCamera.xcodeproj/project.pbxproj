@@ -14,10 +14,16 @@
 		87D6660E2242A7D6000A56D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D6660C2242A7D6000A56D0 /* LaunchScreen.storyboard */; };
 		87D666192242A7D7000A56D0 /* HBCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D666182242A7D7000A56D0 /* HBCameraTests.swift */; };
 		87D666242242A7D7000A56D0 /* HBCameraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D666232242A7D7000A56D0 /* HBCameraUITests.swift */; };
-		87D666352242A89E000A56D0 /* FaceDetect.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87D666342242A89E000A56D0 /* FaceDetect.mm */; };
 		87D666382242A8B3000A56D0 /* libdlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D666362242A8B3000A56D0 /* libdlib.a */; };
 		87D66EFD2242A9AE000A56D0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D66EFC2242A9AE000A56D0 /* Accelerate.framework */; };
 		87D66EFF2242A9B7000A56D0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D66EFE2242A9B7000A56D0 /* AssetsLibrary.framework */; };
+		C621AB68224359CE00C0040A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C621AB67224359CE00C0040A /* AVFoundation.framework */; };
+		C621AB6A224359D700C0040A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C621AB69224359D700C0040A /* CoreMedia.framework */; };
+		C621AB6C22435A1D00C0040A /* shape_predictor_68_face_landmarks.dat in Resources */ = {isa = PBXBuildFile; fileRef = C621AB6B22435A1A00C0040A /* shape_predictor_68_face_landmarks.dat */; };
+		C621AB7022435A6D00C0040A /* HBCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB6F22435A6C00C0040A /* HBCamera.swift */; };
+		C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7122435A7400C0040A /* HBMetalRender.swift */; };
+		C621AB7422435A7500C0040A /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7222435A7500C0040A /* Shader.metal */; };
+		C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C621AB772243714700C0040A /* HBDlibFaceDetect.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,11 +58,17 @@
 		87D666232242A7D7000A56D0 /* HBCameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBCameraUITests.swift; sourceTree = "<group>"; };
 		87D666252242A7D7000A56D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87D666322242A89D000A56D0 /* HBCamera-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBCamera-Bridging-Header.h"; sourceTree = "<group>"; };
-		87D666332242A89E000A56D0 /* FaceDetect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceDetect.h; sourceTree = "<group>"; };
-		87D666342242A89E000A56D0 /* FaceDetect.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceDetect.mm; sourceTree = "<group>"; };
 		87D666362242A8B3000A56D0 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
 		87D66EFC2242A9AE000A56D0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		87D66EFE2242A9B7000A56D0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		C621AB67224359CE00C0040A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C621AB69224359D700C0040A /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C621AB6B22435A1A00C0040A /* shape_predictor_68_face_landmarks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = shape_predictor_68_face_landmarks.dat; sourceTree = "<group>"; };
+		C621AB6F22435A6C00C0040A /* HBCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBCamera.swift; sourceTree = "<group>"; };
+		C621AB7122435A7400C0040A /* HBMetalRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBMetalRender.swift; sourceTree = "<group>"; };
+		C621AB7222435A7500C0040A /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		C621AB762243714700C0040A /* HBDlibFaceDetect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBDlibFaceDetect.h; sourceTree = "<group>"; };
+		C621AB772243714700C0040A /* HBDlibFaceDetect.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HBDlibFaceDetect.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C621AB6A224359D700C0040A /* CoreMedia.framework in Frameworks */,
+				C621AB68224359CE00C0040A /* AVFoundation.framework in Frameworks */,
 				87D66EFF2242A9B7000A56D0 /* AssetsLibrary.framework in Frameworks */,
 				87D66EFD2242A9AE000A56D0 /* Accelerate.framework in Frameworks */,
 				87D666382242A8B3000A56D0 /* libdlib.a in Frameworks */,
@@ -111,6 +125,9 @@
 		87D666022242A7D4000A56D0 /* HBCamera */ = {
 			isa = PBXGroup;
 			children = (
+				C621AB7522436E0600C0040A /* Detect */,
+				C621AB6E22435A5B00C0040A /* Render */,
+				C621AB6D22435A5600C0040A /* Camera */,
 				87D666312242A836000A56D0 /* dlib */,
 				87D666032242A7D4000A56D0 /* AppDelegate.swift */,
 				87D666052242A7D4000A56D0 /* ViewController.swift */,
@@ -118,8 +135,6 @@
 				87D6660A2242A7D6000A56D0 /* Assets.xcassets */,
 				87D6660C2242A7D6000A56D0 /* LaunchScreen.storyboard */,
 				87D6660F2242A7D6000A56D0 /* Info.plist */,
-				87D666332242A89E000A56D0 /* FaceDetect.h */,
-				87D666342242A89E000A56D0 /* FaceDetect.mm */,
 				87D666322242A89D000A56D0 /* HBCamera-Bridging-Header.h */,
 			);
 			path = HBCamera;
@@ -146,6 +161,7 @@
 		87D666312242A836000A56D0 /* dlib */ = {
 			isa = PBXGroup;
 			children = (
+				C621AB6B22435A1A00C0040A /* shape_predictor_68_face_landmarks.dat */,
 				87D666362242A8B3000A56D0 /* libdlib.a */,
 			);
 			path = dlib;
@@ -154,10 +170,38 @@
 		87D66EFB2242A9AE000A56D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C621AB69224359D700C0040A /* CoreMedia.framework */,
+				C621AB67224359CE00C0040A /* AVFoundation.framework */,
 				87D66EFE2242A9B7000A56D0 /* AssetsLibrary.framework */,
 				87D66EFC2242A9AE000A56D0 /* Accelerate.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C621AB6D22435A5600C0040A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				C621AB6F22435A6C00C0040A /* HBCamera.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		C621AB6E22435A5B00C0040A /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				C621AB7222435A7500C0040A /* Shader.metal */,
+				C621AB7122435A7400C0040A /* HBMetalRender.swift */,
+			);
+			path = Render;
+			sourceTree = "<group>";
+		};
+		C621AB7522436E0600C0040A /* Detect */ = {
+			isa = PBXGroup;
+			children = (
+				C621AB762243714700C0040A /* HBDlibFaceDetect.h */,
+				C621AB772243714700C0040A /* HBDlibFaceDetect.mm */,
+			);
+			path = Detect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +312,7 @@
 				87D6660E2242A7D6000A56D0 /* LaunchScreen.storyboard in Resources */,
 				87D6660B2242A7D6000A56D0 /* Assets.xcassets in Resources */,
 				87D666092242A7D4000A56D0 /* Main.storyboard in Resources */,
+				C621AB6C22435A1D00C0040A /* shape_predictor_68_face_landmarks.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,9 +337,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C621AB7422435A7500C0040A /* Shader.metal in Sources */,
+				C621AB7022435A6D00C0040A /* HBCamera.swift in Sources */,
 				87D666062242A7D4000A56D0 /* ViewController.swift in Sources */,
+				C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */,
+				C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */,
 				87D666042242A7D4000A56D0 /* AppDelegate.swift in Sources */,
-				87D666352242A89E000A56D0 /* FaceDetect.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +530,7 @@
 				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/HBCamera/dlib\"";
 				INFOPLIST_FILE = HBCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -523,6 +572,7 @@
 				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/HBCamera/dlib\"";
 				INFOPLIST_FILE = HBCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
