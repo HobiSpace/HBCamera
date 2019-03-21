@@ -38,7 +38,8 @@ class HBCamera: NSObject {
         captureVideoDataOutput = {
             let dataOutput = AVCaptureVideoDataOutput.init()
             dataOutput.alwaysDiscardsLateVideoFrames = false
-            dataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA]
+            dataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA,
+             kCVPixelBufferMetalCompatibilityKey as String: true]
             return dataOutput
         }()
         

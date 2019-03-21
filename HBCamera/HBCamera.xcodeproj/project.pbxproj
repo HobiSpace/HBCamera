@@ -24,6 +24,8 @@
 		C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7122435A7400C0040A /* HBMetalRender.swift */; };
 		C621AB7422435A7500C0040A /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7222435A7500C0040A /* Shader.metal */; };
 		C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C621AB772243714700C0040A /* HBDlibFaceDetect.mm */; };
+		C621AB7C224388B400C0040A /* HBVisionDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7B224388B400C0040A /* HBVisionDetect.swift */; };
+		C621AB7F2243897D00C0040A /* CVPixelBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7E2243897D00C0040A /* CVPixelBuffer+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		C621AB7222435A7500C0040A /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		C621AB762243714700C0040A /* HBDlibFaceDetect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBDlibFaceDetect.h; sourceTree = "<group>"; };
 		C621AB772243714700C0040A /* HBDlibFaceDetect.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HBDlibFaceDetect.mm; sourceTree = "<group>"; };
+		C621AB7B224388B400C0040A /* HBVisionDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBVisionDetect.swift; sourceTree = "<group>"; };
+		C621AB7E2243897D00C0040A /* CVPixelBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 		87D666022242A7D4000A56D0 /* HBCamera */ = {
 			isa = PBXGroup;
 			children = (
+				C621AB7D2243896700C0040A /* Extension */,
 				C621AB7522436E0600C0040A /* Detect */,
 				C621AB6E22435A5B00C0040A /* Render */,
 				C621AB6D22435A5600C0040A /* Camera */,
@@ -200,8 +205,17 @@
 			children = (
 				C621AB762243714700C0040A /* HBDlibFaceDetect.h */,
 				C621AB772243714700C0040A /* HBDlibFaceDetect.mm */,
+				C621AB7B224388B400C0040A /* HBVisionDetect.swift */,
 			);
 			path = Detect;
+			sourceTree = "<group>";
+		};
+		C621AB7D2243896700C0040A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C621AB7E2243897D00C0040A /* CVPixelBuffer+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,7 +356,9 @@
 				87D666062242A7D4000A56D0 /* ViewController.swift in Sources */,
 				C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */,
 				C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */,
+				C621AB7F2243897D00C0040A /* CVPixelBuffer+Extension.swift in Sources */,
 				87D666042242A7D4000A56D0 /* AppDelegate.swift in Sources */,
+				C621AB7C224388B400C0040A /* HBVisionDetect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

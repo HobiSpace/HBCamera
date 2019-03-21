@@ -26,7 +26,14 @@ class ViewController: UIViewController {
     
     var detect = HBDlibFaceDetect.init()
     
+    var visionDetect = HBVisionDetect.init()
+    
     var currentMetaObject: [AVMetadataFaceObject] = [AVMetadataFaceObject]()
+    
+    var frameBufferCache: [CVPixelBuffer] = [CVPixelBuffer].init()
+    
+    var displayLink: CADisplayLink!
+    var isProcessing: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +47,21 @@ class ViewController: UIViewController {
         camera.delegate = self
         camera.startCapture()
         
+        displayLink = CADisplayLink.init(target: self, selector: #selector(updateMetal))
+        displayLink.preferredFramesPerSecond = 30
+//        displayLink.add(to: RunLoop.current, forMode: .common)
     }
     
+    @objc func updateMetal() {
+        guard let firstPixel = frameBufferCache.first else {
+            return
+        }
+        metalRender.render(pixelBuffer: firstPixel)
+        let moreIndex = frameBufferCache.count - 5
+        if moreIndex > 0 {
+            frameBufferCache.removeSubrange(0 ... moreIndex)
+        }
+    }
 }
 
 extension ViewController: HBCameraDelegate {
@@ -50,36 +70,72 @@ extension ViewController: HBCameraDelegate {
         currentMetaObject = metadataObjects as! [AVMetadataFaceObject]
     }
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            return
-        }
+    func dlibDetect(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
-        
+//        let startTime = CFAbsoluteTimeGetCurrent()
         var bounds = [NSValue]()
         for faceObject in currentMetaObject {
             if let face = output.transformedMetadataObject(for: faceObject, connection: connection) {
                 bounds.append(NSValue.init(cgRect: face.bounds))
             }
         }
-
         
         let faceArray = detect.deteciton(on: sampleBuffer, inRects: bounds)
         
-        let endTime = CFAbsoluteTimeGetCurrent()
-        debugPrint("代码执行时长：%f 毫秒", (endTime - startTime)*1000)
+//        let endTime = CFAbsoluteTimeGetCurrent()
+//        debugPrint("代码执行时长：%f 毫秒", (endTime - startTime)*1000)
+    }
+    
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        guard isProcessing == false else {
+            return
+        }
+        
+        isProcessing = true
+        
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+        
+//        metalRender.render(pixelBuffer: pixelBuffer)
+//        let copyBuffer = pixelBuffer.copy()
+        
+//        frameBufferCache.append(pixelBuffer)
+        
+        CVPixelBufferLockBaseAddress(pixelBuffer, [])
+        
+        dlibDetect(output, didOutput: sampleBuffer, from: connection)
         metalRender.render(pixelBuffer: pixelBuffer)
-        //        CVPixelBufferLockBaseAddress(pixelBuffer, [])
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
+        isProcessing = false
         
-        //        let startTime = CFAbsoluteTimeGetCurrent()
         
-        //        vision.detect(pixelBuffer) { [weak self] (request, error) in
-        //            let endTime = CFAbsoluteTimeGetCurrent()
-        //            debugPrint("代码执行时长：%f 毫秒", (endTime - startTime)*1000)
-        //            self?.metalRender.render(pixelBuffer: pixelBuffer)
-        //            CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
-        //        }
+//        visionDetect.detect(pixelBuffer) { [weak self] (request, error) in
+//            self?.metalRender.render(pixelBuffer: pixelBuffer)
+//            CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
+//            self?.isProcessing = false
+//        }
+        
+        
+        
+//        metalRender.render(pixelBuffer: pixelBuffer)
+//        CVPixelBufferLockBaseAddress(pixelBuffer, [])
+//
+//        let startTime = CFAbsoluteTimeGetCurrent()
+//
+//        vision.detect(pixelBuffer) { [weak self] (request, error) in
+//            let endTime = CFAbsoluteTimeGetCurrent()
+//            debugPrint("代码执行时长：%f 毫秒", (endTime - startTime)*1000)
+//            self?.metalRender.render(pixelBuffer: pixelBuffer)
+//            CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
+//        }
+        
+        
+        
+        
+        
         
     }
 }

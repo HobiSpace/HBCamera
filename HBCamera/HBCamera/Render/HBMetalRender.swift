@@ -104,7 +104,7 @@ class HBMetalRender: NSObject {
         
         var textureRef: CVMetalTexture?
         
-        let result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, nil, .bgra8Unorm, width, height, 0, &textureRef)
+        let result: CVReturn = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, nil, .bgra8Unorm, width, height, 0, &textureRef)
         
         if result == kCVReturnSuccess, let textureRef = textureRef {
             displayView.drawableSize = CGSize(width: width, height: height)
@@ -144,7 +144,6 @@ extension HBMetalRender: MTKViewDelegate {
     
     func draw(in view: MTKView) {
         
-        let startTime = CFAbsoluteTimeGetCurrent()
         
         guard let sourceTexture = sourceTexture, let destinTexture = destinTexture, let drawable = view.currentDrawable, let commandBuffer = commandQueue?.makeCommandBuffer() else {
             return
