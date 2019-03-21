@@ -21,15 +21,23 @@ class HBVisionDetect: NSObject {
     }
     
     func detect(_ pixelBuffer: CVPixelBuffer, completion: VNRequestCompletionHandler?) {
-        detectProcessQueue.async {
-            let detectFaceRequest = VNDetectFaceLandmarksRequest(completionHandler: completion)
-            
-            do {
-                try self.sequenceHandler.perform([detectFaceRequest], on: pixelBuffer)
-            } catch {
-                
-            }
-        }
+//        detectProcessQueue.async {
+//            let detectFaceRequest = VNDetectFaceLandmarksRequest(completionHandler: completion)
+//            
+//            do {
+//                try self.sequenceHandler.perform([detectFaceRequest], on: pixelBuffer)
+//            } catch {
+//                
+//            }
+//        }
         
+        
+        let detectFaceRequest = VNDetectFaceLandmarksRequest(completionHandler: completion)
+        
+        do {
+            try self.sequenceHandler.perform([detectFaceRequest], on: pixelBuffer)
+        } catch {
+            
+        }
     }
 }

@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     
     var frameBufferCache: [CVPixelBuffer] = [CVPixelBuffer].init()
     
+    var detectProcessQueue: DispatchQueue = DispatchQueue.init(label: "com.face")
+    
     var displayLink: CADisplayLink!
     var isProcessing: Bool = false
     
@@ -106,10 +108,26 @@ extension ViewController: HBCameraDelegate {
         
         CVPixelBufferLockBaseAddress(pixelBuffer, [])
         
-        dlibDetect(output, didOutput: sampleBuffer, from: connection)
-        metalRender.render(pixelBuffer: pixelBuffer)
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
-        isProcessing = false
+        detectProcessQueue.async {
+            
+//            self.dlibDetect(output, didOutput: sampleBuffer, from: connection)
+//            self.isProcessing = false
+//            DispatchQueue.global().async {
+//                self.metalRender.render(pixelBuffer: pixelBuffer)
+//                CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
+//            }
+            
+            
+            self.visionDetect.detect(pixelBuffer, completion: { (request, error) in
+                // 处理人脸数据
+                self.isProcessing = false
+                DispatchQueue.global().async {
+                    self.metalRender.render(pixelBuffer: pixelBuffer)
+                    CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
+                }
+            })
+        }
+        
         
         
 //        visionDetect.detect(pixelBuffer) { [weak self] (request, error) in
