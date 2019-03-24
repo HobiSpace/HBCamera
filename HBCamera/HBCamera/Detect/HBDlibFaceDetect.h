@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
+#import <dlib/image_processing.h>
+#import <dlib/image_io.h>
 
-NS_ASSUME_NONNULL_BEGIN
+//NS_ASSUME_NONNULL_BEGIN
 
 @interface HBDlibFaceDetect : NSObject
-//之所以 return 的数组 看起来比较啰嗦 但是是为了让你们看清，也可以不这么写
-- (NSArray <NSArray <NSValue *> *>*)detecitonOnSampleBuffer:(CMSampleBufferRef)sampleBuffer inRects:(NSArray<NSValue *> *)rects;
+
+- (std::vector<dlib::full_object_detection>)detecitonOnPixelBuffer:(CVImageBufferRef)imageBuffer inRects:(NSArray<NSValue *> *)rects;
 @end
 
-NS_ASSUME_NONNULL_END
+//NS_ASSUME_NONNULL_END

@@ -7,9 +7,8 @@
 //
 
 #import "HBDlibFaceDetect.h"
-#include <dlib/image_processing.h>
-#include <dlib/image_io.h>
 #import <UIKit/UIKit.h>
+#import "Vertext.h"
 
 @implementation HBDlibFaceDetect {
     dlib::shape_predictor sp;
@@ -26,14 +25,10 @@
     return self;
 }
 
-//之所以 return 的数组 看起来比较啰嗦 但是是为了让你们看清，也可以不这么写
-- (NSArray <NSArray <NSValue *> *>*)detecitonOnSampleBuffer:(CMSampleBufferRef)sampleBuffer inRects:(NSArray<NSValue *> *)rects {
-    
-    
+- (std::vector<dlib::full_object_detection>)detecitonOnPixelBuffer:(CVImageBufferRef)imageBuffer inRects:(NSArray<NSValue *> *)rects {
     dlib::array2d<dlib::bgr_pixel> img;
     dlib::array2d<dlib::bgr_pixel> img_gray;
     // MARK: magic
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
     
     size_t width = CVPixelBufferGetWidth(imageBuffer);
@@ -71,28 +66,28 @@
     dlib::assign_image(img_gray, img);
     
     
-    NSMutableArray *facesLandmarks = [NSMutableArray arrayWithCapacity:0];
+//    NSMutableArray *facesLandmarks = [NSMutableArray arrayWithCapacity:0];
+    std::vector<dlib::full_object_detection> shapeVector;
     for (unsigned long j = 0; j < convertedRectangles.size(); ++j)
     {
         dlib::rectangle oneFaceRect = convertedRectangles[j];
         
         // detect all landmarks
         dlib::full_object_detection shape = sp(img, oneFaceRect);
-        
-        //shape 里面就是我们所需要的68 个点 因为dilb 跟 opencv 冲突 所以我们转换成Foundation 的 Array
-        
-        NSMutableArray *landmarks = [NSMutableArray arrayWithCapacity:0];
-        for (int i = 0; i < shape.num_parts(); i++) {
-            dlib::point p = shape.part(i);
-            [landmarks addObject:[NSValue valueWithCGPoint:CGPointMake(p.x(), p.y())]];
-        }
-        [facesLandmarks addObject:landmarks];
+        shapeVector.push_back(shape);
+//        //shape 里面就是我们所需要的68 个点 因为dilb 跟 opencv 冲突 所以我们转换成Foundation 的 Array
+//
+//        NSMutableArray *landmarks = [NSMutableArray arrayWithCapacity:0];
+//        for (int i = 0; i < shape.num_parts(); i++) {
+//            dlib::point p = shape.part(i);
+//            [landmarks addObject:[NSValue valueWithCGPoint:CGPointMake(p.x(), p.y())]];
+//        }
+//        [facesLandmarks addObject:landmarks];
     }
     
     
-    return facesLandmarks;
+    return shapeVector;
 }
-
 
 - (std::vector<dlib::rectangle>)convertCGRectValueArray:(NSArray<NSValue *> *)rects {
     std::vector<dlib::rectangle> myConvertedRects;

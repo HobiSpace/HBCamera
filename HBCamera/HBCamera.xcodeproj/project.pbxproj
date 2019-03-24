@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8715570222468B980099A789 /* HBRenderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8715570122468B980099A789 /* HBRenderControl.m */; };
+		876DD13822464186009964EC /* HBMetalRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 876DD13722464185009964EC /* HBMetalRender.mm */; };
 		87D666042242A7D4000A56D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D666032242A7D4000A56D0 /* AppDelegate.swift */; };
 		87D666062242A7D4000A56D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D666052242A7D4000A56D0 /* ViewController.swift */; };
 		87D666092242A7D4000A56D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D666072242A7D4000A56D0 /* Main.storyboard */; };
@@ -21,7 +23,6 @@
 		C621AB6A224359D700C0040A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C621AB69224359D700C0040A /* CoreMedia.framework */; };
 		C621AB6C22435A1D00C0040A /* shape_predictor_68_face_landmarks.dat in Resources */ = {isa = PBXBuildFile; fileRef = C621AB6B22435A1A00C0040A /* shape_predictor_68_face_landmarks.dat */; };
 		C621AB7022435A6D00C0040A /* HBCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB6F22435A6C00C0040A /* HBCamera.swift */; };
-		C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7122435A7400C0040A /* HBMetalRender.swift */; };
 		C621AB7422435A7500C0040A /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7222435A7500C0040A /* Shader.metal */; };
 		C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */ = {isa = PBXBuildFile; fileRef = C621AB772243714700C0040A /* HBDlibFaceDetect.mm */; };
 		C621AB7C224388B400C0040A /* HBVisionDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621AB7B224388B400C0040A /* HBVisionDetect.swift */; };
@@ -46,6 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8715570022468B980099A789 /* HBRenderControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBRenderControl.h; sourceTree = "<group>"; };
+		8715570122468B980099A789 /* HBRenderControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBRenderControl.m; sourceTree = "<group>"; };
+		876DD13522462C27009964EC /* Vertext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vertext.h; sourceTree = "<group>"; };
+		876DD13622464185009964EC /* HBMetalRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBMetalRender.h; sourceTree = "<group>"; };
+		876DD13722464185009964EC /* HBMetalRender.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HBMetalRender.mm; sourceTree = "<group>"; };
 		87D666002242A7D4000A56D0 /* HBCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HBCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D666032242A7D4000A56D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87D666052242A7D4000A56D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +73,6 @@
 		C621AB69224359D700C0040A /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C621AB6B22435A1A00C0040A /* shape_predictor_68_face_landmarks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = shape_predictor_68_face_landmarks.dat; sourceTree = "<group>"; };
 		C621AB6F22435A6C00C0040A /* HBCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBCamera.swift; sourceTree = "<group>"; };
-		C621AB7122435A7400C0040A /* HBMetalRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBMetalRender.swift; sourceTree = "<group>"; };
 		C621AB7222435A7500C0040A /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		C621AB762243714700C0040A /* HBDlibFaceDetect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBDlibFaceDetect.h; sourceTree = "<group>"; };
 		C621AB772243714700C0040A /* HBDlibFaceDetect.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HBDlibFaceDetect.mm; sourceTree = "<group>"; };
@@ -195,7 +200,11 @@
 			isa = PBXGroup;
 			children = (
 				C621AB7222435A7500C0040A /* Shader.metal */,
-				C621AB7122435A7400C0040A /* HBMetalRender.swift */,
+				876DD13522462C27009964EC /* Vertext.h */,
+				876DD13622464185009964EC /* HBMetalRender.h */,
+				876DD13722464185009964EC /* HBMetalRender.mm */,
+				8715570022468B980099A789 /* HBRenderControl.h */,
+				8715570122468B980099A789 /* HBRenderControl.m */,
 			);
 			path = Render;
 			sourceTree = "<group>";
@@ -351,12 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				876DD13822464186009964EC /* HBMetalRender.mm in Sources */,
 				C621AB7422435A7500C0040A /* Shader.metal in Sources */,
 				C621AB7022435A6D00C0040A /* HBCamera.swift in Sources */,
 				87D666062242A7D4000A56D0 /* ViewController.swift in Sources */,
 				C621AB782243714700C0040A /* HBDlibFaceDetect.mm in Sources */,
-				C621AB7322435A7500C0040A /* HBMetalRender.swift in Sources */,
 				C621AB7F2243897D00C0040A /* CVPixelBuffer+Extension.swift in Sources */,
+				8715570222468B980099A789 /* HBRenderControl.m in Sources */,
 				87D666042242A7D4000A56D0 /* AppDelegate.swift in Sources */,
 				C621AB7C224388B400C0040A /* HBVisionDetect.swift in Sources */,
 			);
@@ -452,6 +462,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -512,6 +523,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
