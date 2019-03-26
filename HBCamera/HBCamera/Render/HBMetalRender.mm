@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) id<MTLTexture> arTexture;
 
+@property (nonatomic, strong) id<MTLTexture> lutFilterTexture;
+
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
 
 @property (nonatomic, strong) id<MTLRenderPipelineState> renderPipelineState;
@@ -118,6 +120,8 @@
     MTKTextureLoader *loader = [[MTKTextureLoader alloc] initWithDevice:device];
     UIImage *testImage = [UIImage imageNamed:@"ear_00000"];
     self.arTexture = [loader newTextureWithCGImage:testImage.CGImage options:nil error:nil];
+    UIImage *lutImage = [UIImage imageNamed:@"lookup"];
+    self.lutFilterTexture = [loader newTextureWithCGImage:lutImage.CGImage options:nil error:nil];
     
     displayView.delegate = self;
     displayView.framebufferOnly = NO;
@@ -126,6 +130,8 @@
     
     self.commandQueue = [device newCommandQueue];
     self.displayView = displayView;
+    
+    
 }
 
 - (void)render:(CVPixelBufferRef)pixelBuffer {
@@ -221,24 +227,24 @@
 }
 
 - (void)addFilter:(FilterType)type {
-    NSString *funcName;
-    switch (type) {
-        case FilterType_None: {
-            funcName = @"original_kernel_function";
-        } break;
-        case FilterType_Black: {
-            funcName = @"black_white_kernel_function";
-        } break;
-        case FilterType_Gray: {
-            funcName = @"gray_kernel_function";
-        } break;
-        case FilterType_Movie: {
-            funcName = @"movie_kernel_function";
-        } break;
-        default:
-            
-            break;
-    }
+    NSString *funcName = @"lut_filter_function";
+//    switch (type) {
+//        case FilterType_None: {
+//            funcName = @"original_kernel_function";
+//        } break;
+//        case FilterType_Black: {
+//            funcName = @"black_white_kernel_function";
+//        } break;
+//        case FilterType_Gray: {
+//            funcName = @"gray_kernel_function";
+//        } break;
+//        case FilterType_Movie: {
+//            funcName = @"movie_kernel_function";
+//        } break;
+//        default:
+//            
+//            break;
+//    }
     
     if (self.displayView == nil) {
         return;
@@ -269,26 +275,11 @@
     }
     
     // filter
-    if (self.filterComputePipelineState) {
-        id<MTLComputeCommandEncoder> computeEncoder = [commandBuffer computeCommandEncoder];
-        [computeEncoder setComputePipelineState:self.filterComputePipelineState];
-        [computeEncoder setTexture:self.cameraSourceTexture atIndex:0];
-        [computeEncoder setTexture:self.filterTexture atIndex:1];
-        NSUInteger width = self.filterComputePipelineState.threadExecutionWidth;
-        NSUInteger height = self.filterComputePipelineState.maxTotalThreadsPerThreadgroup / width;
-        MTLSize threadsPerThreadGroup = MTLSizeMake(width, height, 1);
-        MTLSize threadGroupPerGrid = MTLSizeMake((self.cameraSourceTexture.width + width - 1) / width, (self.cameraSourceTexture.height + height -1) / height, 1);
-        [computeEncoder dispatchThreadgroups:threadGroupPerGrid threadsPerThreadgroup:threadsPerThreadGroup];
-        [computeEncoder endEncoding];
-    }
-    
-//    // ar
-//    if (self.arRenderPipelineState) {
+//    if (self.filterComputePipelineState) {
 //        id<MTLComputeCommandEncoder> computeEncoder = [commandBuffer computeCommandEncoder];
-//        [computeEncoder setComputePipelineState:self.arComputePipelineState];
-//        [computeEncoder setTexture:self.arTexture atIndex:0];
-//        [computeEncoder setTexture:self.maskTexture atIndex:1];
-//        [computeEncoder setBuffer:self.faceDetectVertexBuffer offset:0 atIndex:2];
+//        [computeEncoder setComputePipelineState:self.filterComputePipelineState];
+//        [computeEncoder setTexture:self.cameraSourceTexture atIndex:0];
+//        [computeEncoder setTexture:self.filterTexture atIndex:1];
 //        NSUInteger width = self.filterComputePipelineState.threadExecutionWidth;
 //        NSUInteger height = self.filterComputePipelineState.maxTotalThreadsPerThreadgroup / width;
 //        MTLSize threadsPerThreadGroup = MTLSizeMake(width, height, 1);
@@ -296,6 +287,21 @@
 //        [computeEncoder dispatchThreadgroups:threadGroupPerGrid threadsPerThreadgroup:threadsPerThreadGroup];
 //        [computeEncoder endEncoding];
 //    }
+    
+    // lut filter
+    if (self.filterComputePipelineState) {
+        id<MTLComputeCommandEncoder> computeEncoder = [commandBuffer computeCommandEncoder];
+        [computeEncoder setComputePipelineState:self.filterComputePipelineState];
+        [computeEncoder setTexture:self.cameraSourceTexture atIndex:0];
+        [computeEncoder setTexture:self.lutFilterTexture atIndex:1];
+        [computeEncoder setTexture:self.filterTexture atIndex:2];
+        NSUInteger width = self.filterComputePipelineState.threadExecutionWidth;
+        NSUInteger height = self.filterComputePipelineState.maxTotalThreadsPerThreadgroup / width;
+        MTLSize threadsPerThreadGroup = MTLSizeMake(width, height, 1);
+        MTLSize threadGroupPerGrid = MTLSizeMake((self.cameraSourceTexture.width + width - 1) / width, (self.cameraSourceTexture.height + height -1) / height, 1);
+        [computeEncoder dispatchThreadgroups:threadGroupPerGrid threadsPerThreadgroup:threadsPerThreadGroup];
+        [computeEncoder endEncoding];
+    }
     
     
     // ar
