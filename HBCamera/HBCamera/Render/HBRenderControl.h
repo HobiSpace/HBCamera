@@ -15,9 +15,7 @@ typedef void(^HBRenderControlDidRenderPixelCompletion)(void);
 typedef void(^HBRenderControlDidFinishCompletion)(void);
 @class MTKView;
 @interface HBRenderControl : NSObject
-
-
-- (void)addFilter;
+- (void)switchNextFilter;
 
 - (void)configDisplayView:(MTKView *)displayView;
 

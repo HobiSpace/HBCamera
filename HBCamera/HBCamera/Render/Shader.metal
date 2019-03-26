@@ -43,6 +43,33 @@ fragment half4 fragment_shader(
     }
 }
 
+vertex VertexOut ar_vertex_shader(const device HBVertex* vertexArray [[buffer(0)]],
+                               unsigned int vid [[vertex_id]]){
+    VertexOut verOut;
+    verOut.position = vertexArray[vid].position;
+    verOut.texturePos = vertexArray[vid].texturePosition;
+    return verOut;
+}
+
+fragment half4 ar_fragment_shader(
+                               VertexOut input [[ stage_in ]],
+                                 texture2d<half, access::sample> imageTexture [[texture(0)]]
+                               )
+{
+    half4 colorSample = imageTexture.sample(textureSampler, input.texturePos); // 得到纹理对应位
+    return colorSample;
+//    mask.write(colorSample, pid);
+//    return mask.sample(textureSampler, input.texturePos);
+//    return half4(0.5, 0.5, 0.5, 1);
+//    return colorSample;
+//    half4 maskSample = maskTexture.sample(textureSampler, input.texturePos);
+//    if (maskSample.a > 0) {
+//        return maskSample;
+//    } else {
+//        return colorSample;
+//    }
+}
+
 // Rec. 709 luma values for grayscale image conversion
 
 kernel void original_kernel_function(texture2d<half, access::read> inTexture [[texture(0)]],

@@ -29,14 +29,24 @@ class ViewController: UIViewController {
     
     var isProcessing: Bool = false
     
+    var swipeGes: UISwipeGestureRecognizer?
+    
+    @objc func swipeNext(sender: UISwipeGestureRecognizer) {
+        renderControl.switchNextFilter()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mtkView = MTKView.init(frame: self.view.bounds)
         self.view.insertSubview(mtkView, at: 0)
         
+        swipeGes = UISwipeGestureRecognizer.init(target: self, action: #selector(swipeNext))
+        swipeGes?.direction = [UISwipeGestureRecognizer.Direction.left, UISwipeGestureRecognizer.Direction.right]
+        mtkView.addGestureRecognizer(swipeGes!)
+        
         renderControl.configDisplay(mtkView)
-        renderControl.addFilter()
+        renderControl.switchNextFilter()
         
         camera.delegate = self
         camera.startCapture()

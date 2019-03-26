@@ -85,9 +85,10 @@ extension HBCamera {
         }
         
         let connection = captureVideoDataOutput.connection(with: .video)
-        connection?.videoOrientation = .portraitUpsideDown
+        connection?.videoOrientation = .portrait
         captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
         captureSession.startRunning()
+        
     }
 }
 

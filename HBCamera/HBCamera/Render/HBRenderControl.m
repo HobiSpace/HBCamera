@@ -13,6 +13,7 @@
 @property (nonatomic, strong) HBMetalRender *metalRender;
 @property (nonatomic, strong) HBDlibFaceDetect *faceDetect;
 @property (nonatomic, strong) dispatch_queue_t faceDetectQueue;
+@property (nonatomic, assign) NSUInteger currentFilter;
 @end
 
 @implementation HBRenderControl
@@ -20,14 +21,20 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
+        self.currentFilter = FilterType_None;
     }
     return self;
 }
 
 #pragma mark - Public
-- (void)addFilter {
-    [self.metalRender addFilter];
+- (void)switchNextFilter {
+    if (self.currentFilter >= FilterType_Max ) {
+        self.currentFilter = FilterType_None;
+    }
+    
+    FilterType type = (FilterType)self.currentFilter;
+    [self.metalRender addFilter:type];
+    self.currentFilter = self.currentFilter + 1;
 }
 
 - (void)configDisplayView:(MTKView *)displayView {
