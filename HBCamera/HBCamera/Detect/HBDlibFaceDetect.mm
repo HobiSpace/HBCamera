@@ -83,10 +83,6 @@
 //            [landmarks addObject:[NSValue valueWithCGPoint:CGPointMake(p.x(), p.y())]];
 //        }
 //        [facesLandmarks addObject:landmarks];
-        NSLog(@"Hobi Face x:%ld, y:%ld, at %i", shape.part(17).x(), shape.part(17).y(), 17);
-        NSLog(@"Hobi Face x:%ld, y:%ld, at %i", shape.part(26).x(), shape.part(26).y(), 26);
-        NSLog(@"Hobi Face x:%ld, y:%ld, at %i", shape.part(12).x(), shape.part(12).y(), 12);
-        NSLog(@"Hobi Face x:%ld, y:%ld, at %i", shape.part(4).x(), shape.part(4).y(), 4);
     }
     
     
